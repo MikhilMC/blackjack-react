@@ -1,5 +1,12 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { calculateScore, dealCard, startGame } from "../utils/helpers";
+import {
+  calculateScore,
+  checkResultAfterGameOver,
+  checkResultDuringGame,
+  checkResultOnStartGame,
+  dealCard,
+  startGame,
+} from "../utils/helpers";
 
 const BlackjackContext = createContext();
 
@@ -78,30 +85,22 @@ function BlackjackProvider({ children }) {
         const newDealerScore = calculateScore(dealerHand);
         let newResult = "";
         if (playerHand.length === 2 && dealerHand.length === 2) {
-          if (newPlayerScore === 0 && newDealerScore === 0) {
-            newResult = "Draw";
-          } else if (newPlayerScore === 0) {
-            newResult = "Player won";
-          } else if (newDealerScore === 0) {
-            newResult = "Player lost";
+          if (isGameOn) {
+            newResult = checkResultOnStartGame(newPlayerScore, newDealerScore);
+          } else {
+            newResult = checkResultAfterGameOver(
+              newPlayerScore,
+              newDealerScore
+            );
           }
         } else {
           if (isGameOn) {
-            if (newPlayerScore > 21) {
-              newResult = "Player lost";
-            }
+            newResult = checkResultDuringGame(newPlayerScore);
           } else {
-            if (newPlayerScore === newDealerScore) {
-              newResult = "Draw";
-            } else if (newDealerScore > 21) {
-              newResult = "Player won";
-            } else if (newPlayerScore <= 21 && newDealerScore <= 21) {
-              if (newPlayerScore > newDealerScore) {
-                newResult = "Player won";
-              } else {
-                newResult = "Player lost";
-              }
-            }
+            newResult = checkResultAfterGameOver(
+              newPlayerScore,
+              newDealerScore
+            );
           }
         }
         if (newResult.length > 0) {

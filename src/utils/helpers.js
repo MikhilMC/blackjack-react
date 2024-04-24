@@ -36,4 +36,39 @@ function calculateScore(hand) {
   return totalScore;
 }
 
-export { dealCard, startGame, calculateScore };
+function checkResultOnStartGame(playerScore, dealerScore) {
+  if (playerScore === 0 && dealerScore === 0) {
+    return "Draw";
+  } else if (playerScore === 0) {
+    return "Player won";
+  } else if (dealerScore === 0) {
+    return "Player lost";
+  } else return "";
+}
+
+function checkResultDuringGame(playerScore) {
+  return playerScore > 21 ? "Player lost" : "";
+}
+
+function checkResultAfterGameOver(playerScore, dealerScore) {
+  if (playerScore === dealerScore) {
+    return "Draw";
+  } else if (dealerScore > 21) {
+    return "Player won";
+  } else if (playerScore <= 21 && dealerScore <= 21) {
+    if (playerScore > dealerScore) {
+      return "Player won";
+    } else {
+      return "Player lost";
+    }
+  } else return "";
+}
+
+export {
+  dealCard,
+  startGame,
+  calculateScore,
+  checkResultOnStartGame,
+  checkResultDuringGame,
+  checkResultAfterGameOver,
+};
