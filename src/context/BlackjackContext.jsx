@@ -78,21 +78,17 @@ function BlackjackProvider({ children }) {
         const newDealerScore = calculateScore(dealerHand);
         let newResult = "";
         if (playerHand.length === 2 && dealerHand.length === 2) {
-          if (newPlayerScore === newDealerScore) {
+          if (newPlayerScore === 0 && newDealerScore === 0) {
             newResult = "Draw";
           } else if (newPlayerScore === 0) {
             newResult = "Player won";
           } else if (newDealerScore === 0) {
             newResult = "Player lost";
-          } else {
-            // Do nothing
           }
         } else {
           if (isGameOn) {
             if (newPlayerScore > 21) {
               newResult = "Player lost";
-            } else {
-              // Do nothing
             }
           } else {
             if (newPlayerScore === newDealerScore) {

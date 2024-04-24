@@ -1,4 +1,5 @@
 import { useBlackjack } from "../context/BlackjackContext";
+import TextDescription from "./TextDescription";
 
 function Result({ dealerFirstCardValue }) {
   const { playerScore, dealerScore, isGameOn, result } = useBlackjack();
@@ -8,19 +9,17 @@ function Result({ dealerFirstCardValue }) {
   return (
     <div className="flex items-center flex-col justify-center">
       {isGameOn ? (
-        <p className="text-2xl">
-          Dealer's first card value :{" "}
-          <span className="font-semibold">{dealerFirstCardValue}</span>
-        </p>
+        <TextDescription
+          mainText="Dealer's first card value: "
+          spanValue={dealerFirstCardValue}
+        />
       ) : (
-        <p className="text-2xl">
-          Dealer score : <span className="font-semibold">{dealerScore}</span>
-        </p>
+        <TextDescription mainText="Dealer score: " spanValue={dealerScore} />
       )}
-      <p className="text-2xl">
-        Player score : <span className="font-semibold">{playerScore}</span>
-      </p>
-      {result !== "" && <p className="text-2xl font-semibold">{result}</p>}
+      <TextDescription mainText="Player score: " spanValue={playerScore} />
+      {result !== "" && (
+        <TextDescription mainText="Result: " spanValue={result} />
+      )}
     </div>
   );
 }

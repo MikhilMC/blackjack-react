@@ -24,7 +24,7 @@ function App() {
         const newDealerScore = calculateScore(dealerHand);
         let newResult = "";
         if (playerHand.length === 2 && dealerHand.length === 2) {
-          if (newPlayerScore === newDealerScore) {
+          if (newPlayerScore === 0 && newDealerScore === 0) {
             // console.log(1);
             newResult = "Draw";
           } else if (newPlayerScore === 0) {
@@ -33,18 +33,12 @@ function App() {
           } else if (newDealerScore === 0) {
             // console.log(3);
             newResult = "Player lost";
-          } else {
-            // console.log(4);
-            // Do nothing
           }
         } else {
           if (isGameOn) {
             if (newPlayerScore > 21) {
               console.log(5);
               newResult = "Player lost";
-            } else {
-              // console.log(6);
-              // Do nothing
             }
           } else {
             if (newPlayerScore === newDealerScore) {
