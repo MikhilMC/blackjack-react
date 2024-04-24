@@ -53,6 +53,10 @@ function checkResultDuringGame(playerScore) {
 function checkResultAfterGameOver(playerScore, dealerScore) {
   if (playerScore === dealerScore) {
     return "Draw";
+  } else if (playerScore === 0) {
+    return "Player won";
+  } else if (dealerScore === 0) {
+    return "Player lost";
   } else if (dealerScore > 21) {
     return "Player won";
   } else if (playerScore <= 21 && dealerScore <= 21) {

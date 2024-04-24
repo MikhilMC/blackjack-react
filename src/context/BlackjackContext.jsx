@@ -103,6 +103,7 @@ function BlackjackProvider({ children }) {
             );
           }
         }
+
         if (newResult.length > 0) {
           dispatch({ type: "game/over", payload: newResult });
         }
