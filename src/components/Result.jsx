@@ -1,10 +1,8 @@
-function Result({
-  playerScore,
-  dealerScore,
-  dealerFirstCardValue,
-  isGameOn,
-  result,
-}) {
+import { useBlackjack } from "../context/BlackjackContext";
+
+function Result({ dealerFirstCardValue }) {
+  const { playerScore, dealerScore, isGameOn, result } = useBlackjack();
+
   // console.log("playerScore", playerScore);
   // console.log("dealerScore", dealerScore);
   return (

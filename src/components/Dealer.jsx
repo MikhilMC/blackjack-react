@@ -1,8 +1,10 @@
+import { useBlackjack } from "../context/BlackjackContext";
 import Card from "./Card";
 
-function Dealer({ hand, isGameOn }) {
+function Dealer() {
+  const { dealerHand, isGameOn } = useBlackjack();
   const blankCardObject = { suit: "", name: "" };
-  const cards = isGameOn ? [hand[0], blankCardObject] : hand;
+  const cards = isGameOn ? [dealerHand[0], blankCardObject] : dealerHand;
 
   // console.log(hand);
   return (

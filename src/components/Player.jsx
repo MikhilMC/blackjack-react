@@ -1,9 +1,11 @@
+import { useBlackjack } from "../context/BlackjackContext";
 import Card from "./Card";
 
-function Player({ hand }) {
+function Player() {
+  const { playerHand } = useBlackjack();
   return (
     <ul className="flex flex-row place-content-center">
-      {hand.map((cardObj, index) => (
+      {playerHand.map((cardObj, index) => (
         <Card key={index} cardObj={cardObj} />
       ))}
     </ul>

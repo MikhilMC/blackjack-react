@@ -1,11 +1,21 @@
+import Result from "./Result";
+import { useBlackjack } from "../context/BlackjackContext";
 import Dealer from "./Dealer";
+import Menu from "./Menu";
 import Player from "./Player";
 
-function Table({ playerHand, dealerHand, isGameOn }) {
+function Table() {
+  const { isTableReady, dealerHand } = useBlackjack();
   return (
     <div>
-      <Dealer hand={dealerHand} isGameOn={isGameOn} />
-      <Player hand={playerHand} />
+      <Menu />
+      {isTableReady && (
+        <>
+          <Result dealerFirstCardValue={dealerHand[0].value} />
+          <Dealer />
+          <Player />
+        </>
+      )}
     </div>
   );
 }
