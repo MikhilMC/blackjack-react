@@ -12,7 +12,7 @@ function Menu() {
   } = useBlackjack();
 
   return (
-    <div className="my-2 py-2 flex items-center justify-center">
+    <div className="my-2 flex items-center justify-center py-2">
       {!isTableReady ? (
         <Button onAction={startNewGame}>New Game</Button>
       ) : (

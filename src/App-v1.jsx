@@ -67,7 +67,7 @@ function App() {
         setDealerScore(newDealerScore);
       }
     },
-    [playerHand, dealerHand, isGameOn]
+    [playerHand, dealerHand, isGameOn],
   );
 
   function handleNewGame() {
@@ -101,7 +101,7 @@ function App() {
   }
 
   return (
-    <div className="grid place-content-center bg-green-600 h-screen">
+    <div className="grid h-screen place-content-center bg-green-600">
       <Header />
       <Menu
         onNewGame={handleNewGame}

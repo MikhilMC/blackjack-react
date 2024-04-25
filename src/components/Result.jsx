@@ -7,7 +7,7 @@ function Result({ dealerFirstCardValue }) {
   // console.log("playerScore", playerScore);
   // console.log("dealerScore", dealerScore);
   return (
-    <div className="flex items-center flex-col justify-center">
+    <div className="flex flex-col items-center justify-center">
       {isGameOn ? (
         <TextDescription
           mainText="Dealer's first card value: "
