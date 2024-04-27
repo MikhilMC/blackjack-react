@@ -8,7 +8,7 @@ function Dealer() {
 
   // console.log(hand);
   return (
-    <ul className="flex flex-row place-content-center">
+    <ul className="flex max-w-64 flex-row place-content-center justify-evenly overflow-x-scroll sm:container sm:overflow-x-hidden">
       {cards.map((cardObj, index) => (
         <Card key={index} cardObj={cardObj} />
       ))}

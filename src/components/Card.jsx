@@ -1,7 +1,7 @@
 function Card({ cardObj }) {
   // console.log(cardObj);
   return (
-    <li className="m-3 flex h-32 w-20 items-center justify-center rounded-md bg-white">
+    <li className="relative m-3 flex h-32 min-w-24 items-center justify-center rounded-md bg-white px-4">
       <span
         className={`${
           cardObj.suit === "♥️" || cardObj.suit === "♦️"
@@ -9,7 +9,7 @@ function Card({ cardObj }) {
             : "text-black"
         } text-3xl font-bold`}
       >
-        {cardObj.suit} {cardObj.name}
+        {cardObj.suit + cardObj.name}
       </span>
     </li>
   );

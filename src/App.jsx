@@ -5,7 +5,7 @@ import { BlackjackProvider } from "./context/BlackjackContext";
 function App() {
   return (
     <BlackjackProvider>
-      <div className="grid h-screen place-content-center bg-green-600">
+      <div className="grid h-screen w-screen place-content-center bg-green-600">
         <Header />
         <Table />
       </div>
