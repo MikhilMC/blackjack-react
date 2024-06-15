@@ -6,6 +6,7 @@ import {
   checkResultOnStartGame,
   dealCard,
   startGame,
+  updateBalance,
 } from "../utils/helpers";
 
 const BlackjackContext = createContext();
@@ -18,6 +19,8 @@ const initialSetup = {
   isTableReady: false,
   isGameOn: false,
   result: "",
+  balanceAmount: 100,
+  betAmount: 0,
 };
 
 function reducer(state, action) {
@@ -29,6 +32,8 @@ function reducer(state, action) {
         isGameOn: true,
         playerHand: action.payload.newPlayerHand,
         dealerHand: action.payload.newDealerHand,
+        betAmount: action.payload.betAmount,
+        balanceAmount: state.balanceAmount - action.payload.betAmount,
       };
 
     case "game/deal":
@@ -57,7 +62,17 @@ function reducer(state, action) {
       };
 
     case "game/over":
-      return { ...state, isGameOn: false, result: action.payload };
+      return {
+        ...state,
+        isGameOn: false,
+        result: action.payload,
+        balanceAmount: updateBalance(
+          state.balanceAmount,
+          state.betAmount,
+          action.payload,
+        ),
+        betAmount: 0,
+      };
 
     default:
       throw new Error("Unknown action type");
@@ -74,6 +89,7 @@ function BlackjackProvider({ children }) {
       isTableReady,
       isGameOn,
       result,
+      balanceAmount,
     },
     dispatch,
   ] = useReducer(reducer, initialSetup);
@@ -90,7 +106,7 @@ function BlackjackProvider({ children }) {
           } else {
             newResult = checkResultAfterGameOver(
               newPlayerScore,
-              newDealerScore
+              newDealerScore,
             );
           }
         } else {
@@ -99,7 +115,7 @@ function BlackjackProvider({ children }) {
           } else {
             newResult = checkResultAfterGameOver(
               newPlayerScore,
-              newDealerScore
+              newDealerScore,
             );
           }
         }
@@ -113,13 +129,16 @@ function BlackjackProvider({ children }) {
         });
       }
     },
-    [playerHand, dealerHand, isGameOn]
+    [playerHand, dealerHand, isGameOn],
   );
 
-  function startNewGame() {
+  function startNewGame(betAmount) {
     const newPlayerHand = startGame();
     const newDealerHand = startGame();
-    dispatch({ type: "game/start", payload: { newPlayerHand, newDealerHand } });
+    dispatch({
+      type: "game/start",
+      payload: { newPlayerHand, newDealerHand, betAmount },
+    });
   }
 
   function makeDeal() {
@@ -152,6 +171,7 @@ function BlackjackProvider({ children }) {
         isTableReady,
         isGameOn,
         result,
+        balanceAmount,
         startNewGame,
         makeDeal,
         takeStand,

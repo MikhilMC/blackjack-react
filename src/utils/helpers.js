@@ -68,6 +68,16 @@ function checkResultAfterGameOver(playerScore, dealerScore) {
   } else return "";
 }
 
+function updateBalance(currentBalance, betAmount, result) {
+  if (result === "Draw") {
+    return currentBalance + betAmount;
+  } else if (result === "Player won") {
+    return currentBalance + 2 * betAmount;
+  } else if (result === "Player lost") {
+    return currentBalance;
+  }
+}
+
 export {
   dealCard,
   startGame,
@@ -75,4 +85,5 @@ export {
   checkResultOnStartGame,
   checkResultDuringGame,
   checkResultAfterGameOver,
+  updateBalance,
 };
